@@ -113,6 +113,12 @@ h2::after{content:"🎀";display:block;font-size:22px;margin-top:-6px}
 .btn{display:inline-block;margin-top:14px;padding:8px 26px;border:0;border-radius:99px;background:var(--pink);color:#fff;font:700 17px 'Tajawal';text-decoration:none;cursor:pointer;box-shadow:0 6px 0 #e56f9c;transition:.15s}
 .btn:active{transform:translateY(5px);box-shadow:0 1px 0 #e56f9c}
 
+/* صفحات منفصلة */
+.page{display:none}
+.page.active{display:block;animation:pgIn .45s ease}
+header.page.active{display:flex}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 /* زر التالي */
 .next-wrap{text-align:center;margin-top:34px}
 .next-wrap .btn{margin-top:0;padding:10px 38px;font-size:19px}
@@ -159,7 +165,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
   <a href="#game">تحدّي</a>
 </nav>
 
-<header class="hero" id="top">
+<header class="hero page" id="top">
   <div class="scene">
     <span class="fl f1">🌸</span><span class="fl f2">🎀</span><span class="fl f3">🌷</span>
     <span class="fl f4">🎀</span><span class="fl f5">🌸</span><span class="fl f6">🌼</span>
@@ -175,7 +181,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
 </header>
 
 <main>
-  <section id="meaning" class="sec">
+  <section id="meaning" class="sec page">
     <h2>ما هو الصبر؟ 🌷</h2>
     <div class="def tilt">
       <small>تعريف الصبر عند الشيخ عبدالرحمن السعدي رحمه الله</small>
@@ -200,7 +206,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
     <div class="next-wrap"><a href="#week1" class="btn">التالي ⬅</a></div>
   </section>
 
-  <section id="week1" class="sec">
+  <section id="week1" class="sec page">
     <div class="badge">الأسبوع الأول</div>
     <h2>الصبر على الابتلاء 🌿</h2>
     <p class="theme">قصة أيوب عليه السلام – سورة ص (٤١–٤٤)</p>
@@ -224,7 +230,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
     <div class="next-wrap"><a href="#video" class="btn sky">التالي ⬅</a></div>
   </section>
 
-  <section id="video" class="sec">
+  <section id="video" class="sec page">
     <h2>شاهدي معنا 🎬</h2>
     <div class="video tilt">
       <div class="ratio">
@@ -235,7 +241,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
     <div class="next-wrap"><a href="#week2" class="btn">التالي ⬅</a></div>
   </section>
 
-  <section id="week2" class="sec">
+  <section id="week2" class="sec page">
     <div class="badge sky">الأسبوع الثاني</div>
     <h2>الصبر على الطاعة 🌙</h2>
     <p class="theme">قصة إبراهيم وإسماعيل عليهما السلام – سورة الصافات (١٠١–١٠٨)</p>
@@ -258,7 +264,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
     <div class="next-wrap"><a href="#game" class="btn sky">التالي ⬅</a></div>
   </section>
 
-  <section id="game" class="sec">
+  <section id="game" class="sec page">
     <h2>تحدّي الكلمات 🏆</h2>
     <div class="quiz tilt">
       <p class="score" id="score">النقاط: ٠</p>
@@ -443,12 +449,25 @@ function pick(btn, ok, e){
 $("#next").onclick = ask;
 ask();
 
-/* ===== تمييز القسم الحالي في الشريط ===== */
+/* ===== التنقل بين الصفحات ===== */
 const links = [...document.querySelectorAll(".nav a")];
-const io = new IntersectionObserver(es => es.forEach(en => {
-  if (en.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
-}), {rootMargin: "-40% 0px -55% 0px"});
-document.querySelectorAll("header[id],section[id]").forEach(s => io.observe(s));
+const pages = [...document.querySelectorAll(".page")];
+function show(id){
+  if (!pages.some(p => p.id === id)) id = "top";
+  pages.forEach(p => p.classList.toggle("active", p.id === id));
+  links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + id));
+  window.scrollTo({top:0, behavior:"instant"});
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  e.preventDefault();
+  const id = a.getAttribute("href").slice(1);
+  show(id);
+  try { history.pushState(null, "", "#" + id); } catch(_){}
+});
+window.addEventListener("popstate", () => show(location.hash.slice(1)));
+show((location.hash || "").slice(1));
 
 </script>
 </body>
