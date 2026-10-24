@@ -113,6 +113,13 @@ h2::after{content:"🎀";display:block;font-size:22px;margin-top:-6px}
 .btn{display:inline-block;margin-top:14px;padding:8px 26px;border:0;border-radius:99px;background:var(--pink);color:#fff;font:700 17px 'Tajawal';text-decoration:none;cursor:pointer;box-shadow:0 6px 0 #e56f9c;transition:.15s}
 .btn:active{transform:translateY(5px);box-shadow:0 1px 0 #e56f9c}
 
+/* زر التالي */
+.next-wrap{text-align:center;margin-top:34px}
+.next-wrap .btn{margin-top:0;padding:10px 38px;font-size:19px}
+.next-wrap .btn.sky{background:var(--sky);box-shadow:0 6px 0 #3ea3d4}
+.next-wrap .btn.sky:active{box-shadow:0 1px 0 #3ea3d4}
+.hero .next-wrap{margin-top:18px}
+
 /* quiz */
 .quiz{background:#fff;border-radius:32px;padding:22px;box-shadow:var(--shadow);border:4px solid var(--sky2);text-align:center}
 .score{display:inline-block;background:var(--pink2);padding:0 18px;border-radius:99px;font-weight:700}
@@ -164,7 +171,7 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
       <p class="teacher">مع أستاذتكنّ الغالية <b>زهرة</b> 🌸</p>
     </div>
   </div>
-  <a href="#meaning" class="down">ابدئي الرحلة ⬇</a>
+  <div class="next-wrap"><a href="#meaning" class="btn">التالي ⬅</a></div>
 </header>
 
 <main>
@@ -189,6 +196,8 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
         <div class="face back"><p>تلقّي البلايا والمصائب والمحن بالرضا والتسليم، دون سخط بالقلب، أو تضجّر باللسان، أو حركة بالجوارح.</p></div>
       </div></div>
     </div>
+
+    <div class="next-wrap"><a href="#week1" class="btn">التالي ⬅</a></div>
   </section>
 
   <section id="week1" class="sec">
@@ -211,6 +220,8 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
       <div class="days" id="days"></div>
       <p class="prog" id="prog">اضغطي على اليوم الذي التزمتِ فيه</p>
     </div>
+
+    <div class="next-wrap"><a href="#video" class="btn sky">التالي ⬅</a></div>
   </section>
 
   <section id="video" class="sec">
@@ -220,6 +231,8 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
         <video controls playsinline preload="metadata" controlslist="nodownload"><source src="video.mp4" type="video/mp4">متصفحك لا يدعم تشغيل الفيديو.</video>
       </div>
     </div>
+
+    <div class="next-wrap"><a href="#week2" class="btn">التالي ⬅</a></div>
   </section>
 
   <section id="week2" class="sec">
@@ -241,6 +254,8 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
       <button class="btn" id="storyBtn">اختاري موقفًا للتفكير ✨</button>
       <p class="prog" id="story"></p>
     </div>
+
+    <div class="next-wrap"><a href="#game" class="btn sky">التالي ⬅</a></div>
   </section>
 
   <section id="game" class="sec">
@@ -252,6 +267,8 @@ footer{position:relative;z-index:2;text-align:center;padding:36px 16px 50px;back
       <p id="fb" class="fb"></p>
       <button class="btn" id="next" hidden>السؤال التالي ➜</button>
     </div>
+
+    <div class="next-wrap"><a href="#top" class="btn">العودة للبداية ⬆</a></div>
   </section>
 </main>
 
